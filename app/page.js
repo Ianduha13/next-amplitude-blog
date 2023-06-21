@@ -1,41 +1,24 @@
 "use client"
-import Image from "next/image"
 import ParticlesBg from "./components/ParticlesBg"
-import { useEffect } from "react"
 import Link from "next/link"
-let amplitude
-
-const AMPLITUDE_API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY
+import useAmplitudeInit, { amplitude } from "@/app/hooks/useAmplitudeInit"
 
 export default function Home() {
-  const initAmplitude = async () => {
-    amplitude = await import("@amplitude/analytics-browser")
-    amplitude.init(AMPLITUDE_API_KEY, undefined, {
-      logLevel: amplitude.Types.LogLevel.Warn,
-      defaultTracking: {
-        sessions: true,
-        formInteractions: true,
-      },
-    })
-  }
+  useAmplitudeInit()
   const clickHandler = () => {
     amplitude.track("click", {
       text: "each click is a new event, and each star or like helps me a lot!",
     })
   }
 
-  useEffect(() => {
-    initAmplitude()
-  }, [])
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
+    <main className="flex min-h-screen flex-col items-center justify-center ">
       <ParticlesBg />
       <section className="w-full grid content-center h-full z-10 ">
         <button
           type="button"
           className="bg-[#e8378b] w-96 py-6 text-center font-semibold px-10 mx-auto rounded-xl hover:scale-95 active:scale-105 transition-all duration-100 ease-in-out"
-          onClick={() => clickHandler()}
+          onClick={clickHandler}
         >
           Press me to trigger an event!
         </button>
