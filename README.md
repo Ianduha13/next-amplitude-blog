@@ -25,12 +25,6 @@ git clone https://github.com/your_username/your_repo_name.git
 Change your directory to your cloned repository, then run:
 
 ```bash
-npm install
-```
-
-or if you use yarn:
-
-```bash
 yarn install
 ```
 
@@ -110,6 +104,3 @@ It is attached to the onClick event of the button, tracking each click as an eve
   Press me to trigger an event!
 </button>
 ```
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
